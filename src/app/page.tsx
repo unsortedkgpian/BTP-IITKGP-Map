@@ -216,11 +216,32 @@
 
 import { useState, useEffect } from "react";
 import { loadGeoJsonData } from "@/utils/geoJsonLoader";
-import CampusMap from "@/components/Map/CampusMap";
-import SearchBar from "@/components/Search/SearchBar";
-import NavigationControls from "@/components/Navigation/NavigationControls";
-import DirectionDisplay from "@/components/Navigation/DirectionDisplay";
+// import CampusMap from "@/components/Map/CampusMap";
+// import SearchBar from "@/components/Search/SearchBar";
+// import NavigationControls from "@/components/Navigation/NavigationControls";
+// import DirectionDisplay from "@/components/Navigation/DirectionDisplay";
 import { Location, Route, PathData } from "@/types";
+
+
+import dynamic from "next/dynamic"; // import dynamic from next
+
+const CampusMap = dynamic(() => import("@/components/Map/CampusMap"), {
+    ssr: false,
+});
+
+const SearchBar = dynamic(() => import("@/components/Search/SearchBar"), {
+    ssr: false,
+});
+
+const NavigationControls = dynamic(
+    () => import("@/components/Navigation/NavigationControls"),
+    { ssr: false }
+);
+
+const DirectionDisplay = dynamic(
+    () => import("@/components/Navigation/DirectionDisplay"),
+    { ssr: false }
+);
 
 // Fallback to hardcoded data
 import allLocations from "@/data";
